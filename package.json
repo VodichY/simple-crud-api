@@ -1,0 +1,21 @@
+{
+  "name": "simple-crud-api",
+  "version": "1.0.0",
+  "description": "simple CRUD API using in-memory database underneath.",
+  "main": "app.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node app",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VodichY/simple-crud-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VodichY/simple-crud-api/issues"
+  },
+  "homepage": "https://github.com/VodichY/simple-crud-api#readme"
+}
