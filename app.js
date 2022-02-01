@@ -5,7 +5,7 @@ const port = 4000;
 const server = http.createServer(requestHandler.readRequest);
 server.listen(port, (err) => {
   if (err) {
-    return console.log("something bad happened", err);
+    return console.error(err.message, err);
   }
   console.log(`server is listening on ${port}`);
 });
