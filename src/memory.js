@@ -6,7 +6,8 @@ const DB = {
 };
 
 function getPerson(params) {
-  return JSON.stringify(DB.person);
+  const personsStringifyed = operationCommon.unParseData(DB.person);
+  return personsStringifyed;
 }
 
 function postPerson(params) {
@@ -17,4 +18,14 @@ function postPerson(params) {
   return personStringifyed;
 }
 
-module.exports = { getPerson, postPerson };
+function getPersonById(params) {
+  const person = DB.person.find((elem) => {
+    if (params.query.id === elem.id) {
+      return elem;
+    }
+  });
+  const personStringifyed = operationCommon.unParseData(person);
+  return personStringifyed;
+}
+
+module.exports = { getPerson, postPerson, getPersonById };

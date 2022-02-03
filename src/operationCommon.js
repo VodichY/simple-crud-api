@@ -10,9 +10,16 @@ function parseData(data) {
 
 function unParseData(data) {
   let strData = "";
+
+  if (!data) {
+    return strData;
+  }
+
   try {
     strData = JSON.stringify(data);
-  } catch (error) {}
+  } catch (error) {
+    strData = "";
+  }
 
   return strData;
 }
