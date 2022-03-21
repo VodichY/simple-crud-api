@@ -15,4 +15,9 @@ function getPersonById(paramRequest) {
 	return person;
 }
 
-module.exports = { getPerson, postPerson, getPersonById };
+function putPersonById(paramRequest) {
+	const person = memory.putPersonById(paramRequest);
+	return person;	
+}
+
+module.exports = { getPerson, postPerson, getPersonById, putPersonById };

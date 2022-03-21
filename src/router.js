@@ -65,6 +65,43 @@ function getPersonById(paramRequest, res) {
   sendResponse(res, result);
 }
 
+function putPersonById(paramRequest, res) {
+  const isValidated = validation.checkSchemeBody(paramRequest);
+
+  if (!isValidated) {
+    const result = {
+      body: "",
+      statusCode: HTTP_STATUS_CODE.badRequest,
+      contentLength: Buffer.byteLength(""),
+      contentType: "text/plain",
+    };
+    sendResponse(res, result);
+    return;
+  }
+
+  const person = service.putPersonById(paramRequest);
+
+  if (!person) {
+    const result = {
+      body: person,
+      statusCode: HTTP_STATUS_CODE.badRequest,
+      contentLength: Buffer.byteLength(person),
+      contentType: "text/json",
+    };
+    sendResponse(res, result);
+    return;
+  }
+
+  const result = {
+    body: person,
+    statusCode: HTTP_STATUS_CODE.OK,
+    contentLength: Buffer.byteLength(person),
+    contentType: "text/json",
+  };
+
+  sendResponse(res, result);
+}
+
 function sendResponse(res, result) {
   res
     .writeHead(result.statusCode, {
@@ -74,4 +111,4 @@ function sendResponse(res, result) {
     .end(result.body);
 }
 
-module.exports = { postPerson, getPerson, sendResponse, getPersonById };
+module.exports = { postPerson, getPerson, sendResponse, getPersonById, putPersonById };
