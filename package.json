@@ -2,10 +2,10 @@
   "name": "simple-crud-api",
   "version": "1.0.0",
   "description": "simple CRUD API using in-memory database underneath.",
-  "main": "server.js",
+  "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node server",
+    "start": "node app",
     "test": "jest"
   },
   "repository": {
