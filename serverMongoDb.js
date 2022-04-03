@@ -11,10 +11,14 @@ async function run() {
     await clientMongoDb.connect();
     console.log("Connected to DB successfully!");
   } catch (err) {
-    clientMongoDb.close();
     console.error(err.message, err);
   }
   return clientMongoDb;
 }
 
-module.exports = { run };
+async function close() {
+  await clientMongoDb.close();
+  console.log("Connected to DB is closed!");
+}
+
+module.exports = { run, close };

@@ -1,3 +1,4 @@
+const { error } = require("console");
 const http = require("http");
 const { configApp } = require("./src/config");
 const requestHandler = require("./src/requestHandler");
@@ -8,11 +9,14 @@ async function run() {
     await serverApp.listen(configApp.PORT);
     console.log(`server is listening on ${configApp.PORT}`);
   } catch (err) {
-    serverApp.close();
     console.error(err.message, err);
-    console.log("server is closed");
   }
   return serverApp;
 }
 
-module.exports = { run };
+async function close() {
+  serverApp.close();
+  console.log("Connection to SERVER is closed!");
+}
+
+module.exports = { run, close};
