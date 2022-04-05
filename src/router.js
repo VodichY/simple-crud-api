@@ -28,8 +28,8 @@ function postPerson(paramRequest, res) {
   sendResponse(res, result);
 }
 
-function getPerson(paramRequest, res) {
-  const person = service.getPerson(paramRequest);
+async function getPerson(paramRequest, res) {
+  const person = await service.getPerson(paramRequest);
 
   const result = {
     body: person,

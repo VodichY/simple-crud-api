@@ -21,4 +21,4 @@ async function close() {
   console.log("Connected to DB is closed!");
 }
 
-module.exports = { run, close };
+module.exports = { run, close , clientMongoDb};

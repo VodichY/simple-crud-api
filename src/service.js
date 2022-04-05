@@ -1,7 +1,8 @@
 const memory = require("./memory");
+const dbMongo = require("./dbMongo");
 
-function getPerson(paramRequest) {
-	const person = memory.getPerson(paramRequest);
+async function getPerson(paramRequest) {
+	const person = await dbMongo.getPerson(paramRequest);
 	return person;
 }
 
