@@ -1,11 +1,24 @@
-const http = require("http");
-const requestHandler = require("./src/requestHandler");
-const port = 4000;
+const serverApp = require("./serverApp");
+const serverMongoDb = require("./serverMongoDb");
 
-const server = http.createServer(requestHandler.readRequest);
-server.listen(port, (err) => {
-  if (err) {
-    return console.error(err.message, err);
+let clientMongoDb;
+let clientApp;
+
+async function runApp() {
+  clientMongoDb = await serverMongoDb.run();
+  if (!clientMongoDb.topology.isConnected()) {
+    await serverMongoDb.close();
+    return;
   }
-  console.log(`server is listening on ${port}`);
-});
+
+  clientApp = await serverApp.run();
+  if (!clientApp.listening) {
+    await serverMongoDb.close();
+    await serverApp.close();
+	return;
+  }
+}
+
+runApp();
+
+module.exports = { clientApp, clientMongoDb };

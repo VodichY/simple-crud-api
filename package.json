@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/VodichY/simple-crud-api#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
+    "mongodb": "^4.4.1",
     "uuid": "^8.3.2"
   }
 }
