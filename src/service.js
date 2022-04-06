@@ -6,18 +6,18 @@ async function getPerson(paramRequest) {
 	return person;
 }
 
-function postPerson(paramRequest) {
-	const person = memory.postPerson(paramRequest);
+async function postPerson(paramRequest) {
+	const person = await dbMongo.postPerson(paramRequest);
 	return person;
 }
 
-function getPersonById(paramRequest) {
-	const person = memory.getPersonById(paramRequest);
+async function getPersonById(paramRequest) {
+	const person = await dbMongo.getPersonById(paramRequest);
 	return person;
 }
 
-function putPersonById(paramRequest) {
-	const person = memory.putPersonById(paramRequest);
+async function putPersonById(paramRequest) {
+	const person = await dbMongo.putPersonById(paramRequest);
 	return person;	
 }
 
