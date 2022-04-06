@@ -2,7 +2,7 @@ const { HTTP_STATUS_CODE } = require("./httpStatusCode");
 const validation = require("./validation");
 const service = require("./service");
 
-function postPerson(paramRequest, res) {
+async function postPerson(paramRequest, res) {
   const isValidated = validation.checkSchemeBody(paramRequest);
 
   if (!isValidated) {
@@ -16,7 +16,7 @@ function postPerson(paramRequest, res) {
     return;
   }
 
-  const person = service.postPerson(paramRequest);
+  const person = await service.postPerson(paramRequest);
 
   const result = {
     body: person,
@@ -28,8 +28,8 @@ function postPerson(paramRequest, res) {
   sendResponse(res, result);
 }
 
-function getPerson(paramRequest, res) {
-  const person = service.getPerson(paramRequest);
+async function getPerson(paramRequest, res) {
+  const person = await service.getPerson(paramRequest);
 
   const result = {
     body: person,
@@ -41,8 +41,8 @@ function getPerson(paramRequest, res) {
   sendResponse(res, result);
 }
 
-function getPersonById(paramRequest, res) {
-  const person = service.getPersonById(paramRequest);
+async function getPersonById(paramRequest, res) {
+  const person = await service.getPersonById(paramRequest);
 
   if (!person) {
     const result = {
@@ -65,7 +65,7 @@ function getPersonById(paramRequest, res) {
   sendResponse(res, result);
 }
 
-function putPersonById(paramRequest, res) {
+async function putPersonById(paramRequest, res) {
   const isValidated = validation.checkSchemeBody(paramRequest);
 
   if (!isValidated) {
@@ -79,7 +79,7 @@ function putPersonById(paramRequest, res) {
     return;
   }
 
-  const person = service.putPersonById(paramRequest);
+  const person = await service.putPersonById(paramRequest);
 
   if (!person) {
     const result = {
