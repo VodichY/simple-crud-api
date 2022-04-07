@@ -11,7 +11,6 @@ async function runApp() {
   const clientApp = await serverApp.run();
   if (!clientApp.listening) {
     await serverMongoDb.close();
-    await serverApp.close();
     return;
   }
 }

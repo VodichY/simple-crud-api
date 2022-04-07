@@ -1,22 +1,31 @@
-const { error } = require("console");
-const http = require("http");
+const express = require("express");
+const appExpress = express();
+appExpress.use(express.json());
 const { configApp } = require("./src/config");
-const requestHandler = require("./src/requestHandler");
-const serverApp = http.createServer(requestHandler.readRequest);
 
+appExpress.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+appExpress.post("/Person", (req, res) => {
+  res.send("Hello World!");
+});
+
+let clientApp;
 async function run() {
-  try {
-    await serverApp.listen(configApp.PORT);
+   try {
+    clientApp = await appExpress.listen(configApp.PORT);
     console.log(`server is listening on ${configApp.PORT}`);
   } catch (err) {
+    clientApp = { listening: false};
     console.error(err.message, err);
   }
-  return serverApp;
+  return clientApp;
 }
 
 async function close() {
-  serverApp.close();
+  await clientApp.close();
   console.log("Connection to SERVER is closed!");
 }
 
-module.exports = { run, close};
+module.exports = { run, close };
