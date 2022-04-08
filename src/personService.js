@@ -1,8 +1,7 @@
-const memory = require("./memory");
 const dbMongo = require("./dbMongo");
 
-async function getPerson(paramRequest) {
-	const person = await dbMongo.getPerson(paramRequest);
+async function getPersons(paramRequest) {
+	const person = await dbMongo.getPersons(paramRequest);
 	return person;
 }
 
@@ -21,4 +20,4 @@ async function putPersonById(paramRequest) {
 	return person;	
 }
 
-module.exports = { getPerson, postPerson, getPersonById, putPersonById };
+module.exports = { getPersons, postPerson, getPersonById, putPersonById };

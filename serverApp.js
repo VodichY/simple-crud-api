@@ -29,3 +29,11 @@ async function close() {
 }
 
 module.exports = { run, close };
+
+process.on('SIGTERM', () => {
+  console.info('SIGTERM signal received.');
+  console.log('Closing http server.');
+  server.close(() => {
+    console.log('Http server closed.');
+  });
+});

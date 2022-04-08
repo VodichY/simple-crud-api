@@ -1,23 +1,22 @@
-const { clientMongoDb } = require("../serverMongoDb");
+const  dbMongo = require("../appMongoDb");
 const { ObjectId } = require("mongodb");
 const operationCommon = require("./operationCommon");
 
-async function getPerson(params) {
-  const dataBase = clientMongoDb.db("dbTest");
-  const persons = dataBase.collection("persons");
+async function getPersons(params) {
+  const dataBase = dbMongo.db("dbTest");
+  const collectionPersons = dataBase.collection("persons");
 
   const query = {};
   const options = {};
 
-  const arrCursor = await persons.find(query, options).toArray();
-  const personsStringifyed = operationCommon.unParseData(arrCursor);
-  return personsStringifyed;
+  const persons = await collectionPersons.find(query, options).toArray();
+  return persons;
 }
 
 async function postPerson(params) {
   const dataParsed = operationCommon.parseData(params.body);
 
-  const dataBase = clientMongoDb.db("dbTest");
+  const dataBase = dbMongo.db("dbTest");
   const persons = dataBase.collection("persons");
 
   const cursor = await persons.insertOne(dataParsed);
@@ -26,7 +25,7 @@ async function postPerson(params) {
 }
 
 async function getPersonById(params) {
-  const dataBase = clientMongoDb.db("dbTest");
+  const dataBase = dbMongo.db("dbTest");
   const persons = dataBase.collection("persons");
 
   const query = { _id: ObjectId(params.query.id) };
@@ -40,7 +39,7 @@ async function getPersonById(params) {
 async function putPersonById(params) {
   const dataParsed = operationCommon.parseData(params.body);
 
-  const dataBase = clientMongoDb.db("dbTest");
+  const dataBase = dbMongo.db("dbTest");
   const persons = dataBase.collection("persons");
 
   const query = { _id: ObjectId(dataParsed.id) };
@@ -53,4 +52,4 @@ async function putPersonById(params) {
 
 }
 
-module.exports = { getPerson, postPerson, getPersonById, putPersonById };
+module.exports = { getPersons, postPerson, getPersonById, putPersonById };

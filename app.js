@@ -1,18 +1,16 @@
-const serverApp = require("./serverApp");
-const serverMongoDb = require("./serverMongoDb");
+const express = require("express");
+const personRouter = require("./src/personRouter");
+const app = express();
+app.use(express.json());
 
-async function runApp() {
-  const clientMongoDb = await serverMongoDb.run();
-  if (!clientMongoDb.topology.isConnected()) {
-    await serverMongoDb.close();
+app.use('/', (req, res, next) => {
+  if (req.originalUrl === '/') {
+    res.send('Service is running!');
     return;
   }
+  next();
+});
 
-  const clientApp = await serverApp.run();
-  if (!clientApp.listening) {
-    await serverMongoDb.close();
-    return;
-  }
-}
+app.use('/person', personRouter);
 
-runApp();
+module.exports = app;
